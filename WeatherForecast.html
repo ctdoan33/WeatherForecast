@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>WeatherForecast</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('form').submit(function() {
+                    //replace APIKEY
+                    var url="http://api.openweathermap.org/data/2.5/weather?q="+$("#search").val()+"&APPID=<<APIKEY>>";
+                    $.get(url, function(res) {
+                        $("#name").text(res.name);
+                        $("#temp").text("Temperature:"+Math.floor((res.main.temp-273.15)*9/5+32));
+                    }, 'json');
+                    return false;
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <form>
+            <input type="text" id="search" name="search">
+            <input type="submit" value="Search Weather">
+        </form>
+        <p id="name"></p>
+        <p id="temp"></p>
+    </body>
+</html>
